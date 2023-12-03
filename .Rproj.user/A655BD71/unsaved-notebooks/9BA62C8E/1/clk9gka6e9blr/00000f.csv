@@ -1,0 +1,4 @@
+"0","grouped_means <- msleep %>%"
+"0","  group_by(vore) %>%"
+"0","  summarize(mean_sleep = mean(sleep_total, na.rm = TRUE))"
+"0",""

@@ -1,0 +1,2 @@
+"0","ggplot(subset_data, aes(x = sleep_total, y = sleep_rem)) +"
+"0","  geom_point()"

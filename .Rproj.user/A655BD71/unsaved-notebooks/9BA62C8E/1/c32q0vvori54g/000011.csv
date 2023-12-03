@@ -1,0 +1,4 @@
+"0","sleep_histogram <- ggplot ("
+"0","  data = msleep,"
+"0","  mapping = aes(x = sleep_total)) +"
+"0","  geom_histogram(binwidth = 2)"

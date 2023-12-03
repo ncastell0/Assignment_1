@@ -1,0 +1,163 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-11-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+library(tidyverse)
+data(msleep)
+?msleep
+```
+
+
+# 1. Convert into factors
+
+```{r}
+msleep$genus <- factor(msleep$genus)
+msleep$vore <- factor(msleep$vore)
+msleep$order <- factor(msleep$order)
+msleep$conservation <- factor(msleep$conservation)
+```
+
+
+# 2. Shortest sleep time
+
+```{r}
+msleep |>
+count(sleep_total, sort = TRUE)
+
+
+shortest_sleep <- 1.9
+shortest_sleep_mammal <- "Giraffe"
+```
+
+
+# 3. Most missing
+
+```{r}
+# Calculating total missing per column
+missing_data_counts <- colSums(is.na(msleep))
+
+# Finding the column with the most missing
+column_with_most_missing <- names(missing_data_counts)[which.max(missing_data_counts)]
+
+# Printing the result
+cat("Column with the most missing values:", column_with_most_missing, "\n")
+cat("Number of missing values:", max(missing_data_counts), "\n")
+
+# Creating variables
+most_missing <- "sleep_cycle"
+missing_values <- 51
+
+
+# 4. Correlations
+
+
+```{r}
+correlations <- cor(msleep[, c("sleep_total", "sleep_rem", "sleep_cycle", "awake", "brainwt", "bodywt")], use = "pairwise.complete.obs")
+```
+
+
+```{r}
+numeric_vars <- msleep[, c("sleep_total", "sleep_rem", "sleep_cycle", "awake", "brainwt", "bodywt")]
+
+correlations <- cor(numeric_vars, use = "pairwise.complete.obs")
+
+```
+
+# 5. Highest correlation
+highest_corr <- 0.9337822
+
+# 6. Sleep time distribution
+
+```{r}
+sleep_histogram <- ggplot(
+  data = msleep,
+  mapping = aes(x = sleep_total)) +
+  geom_histogram(binwidth = 1)
+```
+
+
+# 7. Bar chart for food categories
+```{r}
+food_barchart <- ggplot(
+  data = msleep,
+  mapping = aes(x = vore)) +
+  geom_bar()
+```
+
+
+# 8. Grouped box plot for sleep time
+
+```{r}
+sleep_boxplot <- ggplot(msleep, aes(x = vore, y = sleep_total)) +
+  geom_boxplot()
+```
+
+
+# 9. Longest average sleep time
+highest_average <- 14.940000
+
+```{r}
+# Calculating group means
+group_means <- msleep %>%
+  group_by(vore) %>%
+  summarize(mean_sleep = mean(sleep_total, na.rm = TRUE))
+
+```
+
+
+# 10. REM sleep vs. total sleep, colored by order
+```{r}
+sleep_scatterplot <- ggplot(msleep, aes(x = sleep_total, y = sleep_rem)) +
+  geom_point(aes(color = order))
+```
+
+
+# 11. REM sleep vs. total sleep for the order most common in the data
+sleep_scatterplot2 <- ...
+
+```{r}
+# Determining the most common order
+order_frequency <- table(msleep$order)
+print(order_frequency)
+
+# Filtering "Rodentia" cases
+subset_data <- msleep %>%
+  filter(order == "Rodentia")
+
+# Plotting total vs. rem sleep time
+sleep_scatterplot <- ggplot(subset_data, aes(x = sleep_total, y = sleep_rem)) +
+  geom_point()
+
+```
+```{r}
+ggplot(subset_data, aes(x = sleep_total, y = sleep_rem)) +
+  geom_point()
+```
+

@@ -1,0 +1,4 @@
+"0","food_barchart <- ggplot("
+"0","  data = msleep,"
+"0","  mapping = aes(x = vore)) +"
+"0","  geom_bar()"
