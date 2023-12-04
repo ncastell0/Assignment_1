@@ -4,7 +4,9 @@ Partial assignment in the course Data Analysis with R, part 1, at Umeå Universi
 
 ## Related modules:
 ### Preliminaries
-|    Introduction to R and RStudio
-|    Basic statistics
+Introduction to R and RStudio
+
+
+Basic statistics
 ### Exploratory Data Analysis (EDA)
-|    R4DS
+R4DS
